@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ news.title }} {% endblock %}
+
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+        <div class="card mb-3">
+            <div class="card-header">
+                Kategoriya: <a href='{{ news.category.get_absolute_url }}'>{{ news.category }}</a>
+            </div>
+            <div class="card-body">
+                <div class="media">
+                    {% if news.image %}
+                        <img src={{ news.image.url }} width="120" height="120" class="mr-3">
+                    {% endif %}
+                    <div class="media-body">
+                        <h5 class="card-title">{{ news.title }}</h5>
+                        <p class="card-text">{{ news.description}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{ news.created|date:"d-m-Y H:i" }}
+            </div>
+        </div>
+{% endblock %}

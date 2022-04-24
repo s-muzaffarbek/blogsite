@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ category.title }} {% endblock %}
+
+{% block sidebar %}
+        <div class="col-md-4">
+            {% include 'inc/_sidebar.html' %}
+        </div>
+{% endblock %}
+
+{% block content %}
+            {% for new in news %}
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Kategoriya: {{ new.category }}
+                    </div>
+                    <div class="card-body">
+                        <div class="media">
+                            {% if new.photo %}
+                                <img src={{ new.photo.url }} width="90" height="120">
+                            {% endif %}
+                            <div class="media-body">
+                                <h5 class="card-title">{{ new.title }}</h5>
+                                <p class="card-text">{{ new.content }}</p>
+                                <a href="{{ new.get_absolute_url }}" class="btn btn-primary">Read more ...</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ new.created|date:"d-m-Y H:i" }}
+                    </div>
+                </div>
+            {% endfor %}
+{% endblock %}

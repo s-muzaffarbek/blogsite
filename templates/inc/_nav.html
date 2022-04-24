@@ -1,0 +1,36 @@
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">Yangiliklar</a>
+            <button class="navbar-toggler" type="button" data-bstoggle="collapse"
+                    data-bs-target="#navbarSupportedContent" ariacontrols="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Bosh menyu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}">Biz bilan aloqa</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'add_news' %}">Yangilik qo'shish</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                {% if request.user.is_authenticated %}
+                    Xush kelibsiz {{ user.username }} | <a href="{% url 'logout' %}"> Chiqish </a>
+                {% else %}
+                    <span class="navbar-text">
+                    <a href="{% url 'register' %}">Ro'yhatdan o'tish</a> |
+                    <a href="{% url 'login' %}">Kirish</a>
+                </span>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</div>

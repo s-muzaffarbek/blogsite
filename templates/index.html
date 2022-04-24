@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Yangiliklar {% endblock %}
+
+{% block sidebar %}
+    {% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+    {% for new in news %}
+        <div class="card mb-3">
+            <div class="card-header">
+                Kategoriya: <a href='{{ new.category.get_absolute_url }}'>{{ new.category }}</a>
+            </div>
+            <div class="card-body">
+                <div class="media">
+                    {% if new.image %}
+                        <img src={{ new.image.url }} width="120" height="120">
+                    {% endif %}
+                    <div class="media-body">
+                        <h5 class="card-title">{{ new.title }}</h5>
+                        <p class="card-text">{{ new.description|truncatewords:"50" }}</p>
+                        <a href="{{ new.get_absolute_url }}" class="btn btn-primary">Read more ...</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                {{ new.created|date:"d-m-Y H:i" }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% load news_tags %}
+{% comment %}
+<div class="list-group">
+    <a href="{% url 'home' %}" class="list-group-item list-group-item-action active" aria-current="true">
+        Yangilik kategoriyalari
+    </a>
+    {% get_list_categories as categories %}
+    {% for category in categories %}
+        <a href="{% url 'category' category.slug %}"
+           class="list-group-item list-group-item-action">{{ category.name }}
+        </a>
+    {% endfor %}
+</div>
+
+{% endcomment %}
+{% show_categories %}
